@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calificar Profesional</title>
+    <!-- Incluye tus enlaces a Bootstrap o cualquier otro estilo que estés utilizando -->
+    <link rel="stylesheet" href="tu_estilo.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="icon" type="image/png" href="/img/logo.png">
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Calificar Profesional</h2>
+
+        <!-- Formulario de Calificación -->
+        <form action="/registrar" method="post" id="calificacionForm">
+            <!-- Puntuación -->
+            <div class="mb-3">
+                <label for="puntuacion" class="form-label">Puntuación:</label>
+                <select class="form-select" id="puntuacion" name="puntuacion" required>
+                    <option value="1">1 Estrella</option>
+                    <option value="2">2 Estrellas</option>
+                    <option value="3">3 Estrellas</option>
+                    <option value="4">4 Estrellas</option>
+                    <option value="5">5 Estrellas</option>
+                </select>
+            </div>
+
+            <!-- Comentario -->
+            <div class="mb-3">
+                <label for="comentario" class="form-label">Comentario:</label>
+                <textarea class="form-control" id="comentario" name="comentario" rows="4" required></textarea>
+            </div>
+
+            <!-- Botón de Enviar -->
+            <button type="submit" class="btn btn-primary">Enviar Calificación</button>
+        </form>
+
+        <!-- Estrellas para Calificación -->
+        <ul class="list-unstyled d-flex justify-content-center text-warning mb-0" id="starRating">
+            <li th:each="starNumber : ${#numbers.sequence(1, 5)}">
+                <i th:class="${'fas fa-star fa-sm ' + (starNumber le profesionalRating ? 'text-warning' : 'text-secondary')}"
+                   th:data-rating="${starNumber}" th:onclick="'rateProfessional(' + ${professionalId} + ', ' + ${starNumber} + ')'"
+                   style="cursor: pointer;"></i>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Script para enviar calificación al servidor -->
+    <script th:inline="javascript">
+        function rateProfessional(professionalId, rating) {
+            $.ajax({
+                type: 'POST',
+                url: '/ruta/del/controlador', // Reemplaza con la URL correcta de tu backend
+                data: { professionalId: professionalId, rating: rating },
+                success: function (response) {
+                    console.log(response);
+                    // Actualizar la visualización de las estrellas según la respuesta del servidor si es necesario
+                },
+                error: function (error) {
+                    console.error('Error al enviar la calificación:', error);
+                }
+            });
+        }
+    </script>
+
+    <!-- Incluye tus scripts de Bootstrap o cualquier otro script que estés utilizando -->
+    <script src="tu_script.js"></script>
+</body>
+
+</html>

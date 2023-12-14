@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/css/inicio.css">
+    <link rel="icon" type="/image/png" href="/img/logo.png">
+    <title>Lista de profesionales</title>
+</head>
+<body>
+<nav class="">
+    <a class="logo" th:if="${session.usuariosession != null}" th:href="@{/inicio}">
+        <img src="/img/logoColor.png" alt="" class="logo">
+    </a>
+    <a class="logo" th:unless="${session.usuariosession != null}" th:href="@{/}">
+        <img src="/img/logoColor.png" alt="" class="logo">
+    </a>
+    <div class="volver">
+        <a th:if="${session.usuariosession != null}" th:href="@{/inicio}"> Volver a Inicio</a>
+        <a th:unless="${session.usuariosession != null}" th:href="@{/}">Volver a Inicio</a>
+    </div>
+</nav>
+<section class="banner-especialidad mb-4">
+    <div>
+        <h1>Elegir Profesional y Pedir Turno</h1>
+        <p>Home / Pacientes / Especialidades/ Profesionales</p>
+    </div>
+</section>
+<div class="container" th:if="${not #lists.isEmpty(profesionales)}">
+    <div class="row">
+        <ul class="list-unstyled d-flex">
+            <li th:each="profesional : ${profesionales}" class="col-md-3 p-1">
+                <div class="text-center">
+                    <img th:if="${profesional.imagen != null}"
+                         th:src="@{/imagen/perfil/{id}(id=${profesional.id})}" class="rounded-circle mb-3" style="width: 150px;" alt="Avatar">
+                    <img class="rounded-circle mb-3" style="width: 150px;" alt="Avatar" th:unless="${profesional.imagen != null}"
+                         th:src="@{/img/usuario.jpg}">
+                    <h5 class="mb-2" th:text="${profesional.nombre + ' ' + profesional.apellido}"></h5>
+                    <p class="text-muted" th:text="${profesional.especialidad}"></p>
+                    <ul class="list-unstyled d-flex justify-content-center text-warning mb-2 mt-0">
+                        <!-- Utiliza Thymeleaf para iterar sobre las estrellas según el promedio -->
+                        <li th:each="star : ${#numbers.sequence(1, 5)}">
+                            <i th:class="${promediosPuntuacion[profesional.id] >= star} ? 'fas fa-star fa-sm' : 'far fa-star fa-sm'"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-center">
+                    <p class="text-muted"><i class="fas fa-quote-left"></i>
+                        Mi experiencia con el Dr. <span th:text="${profesional.nombre}"></span> fue excepcional. Su conocimiento y enfoque compasivo hicieron que me sintiera cómodo. Explicó mi diagnóstico claramente y con paciencia. Agradecido por su profesionalismo.
+                        <i class="fas fa-quote-right"></i>
+                    </p>
+
+                    <p class="text-muted">
+                        Pedir turno para el Dr. <a th:text="${profesional.apellido}" th:href="@{/sacar-turno/{profesionalId}(profesionalId=${profesional.id})}"></a>
+                    </p>
+                </div>
+                <div class="volver-a-inicio">
+                    <a href="/profesional/especialidad">VOLVER A INICIO</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div th:if="${mensaje != null}">
+    <p th:text="${mensaje}"></p>
+</div>
+<footer class="pie mt-2">
+    <div class="links mt-5">
+        <div class="seccion-nav">
+            <p class="titulo-sec">Nosotros</p>
+            <div>
+                <a>Preguntas frecuentes</a>
+
+            </div>
+        </div>
+        <div class="seccion-nav">
+            <p class="titulo-sec">Pacientes</p>
+            <div>
+                <a href="#seccion1" onclick="cambiarCartel('pac')">Información</a>
+            </div>
+        </div>
+        <div class="seccion-nav">
+            <p class="titulo-sec">E-mail</p>
+            <div>
+                <a href="mailto:tudireccion@gmail.com">
+                    <i class="fas fa-envelope"></i> info@sanatoriovitalis.com
+                </a>
+            </div>
+        </div>
+        <div class="seccion-nav">
+            <p class="titulo-sec">Contacto</p>
+            <div>
+                <a href="https://chat.whatsapp.com/11-1234-5678" target="_blank">
+                    <i class="fab fa-whatsapp"></i> 11-1234-5678
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="tyc">
+        &copy; 2023 Sanatorio Vitalis. Todos los derechos reservados.
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+<script src="/js/scriptEspecialidad.js"></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Usuarios</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/especialidad.css">
+</head>
+<body>
+
+<nav class="">
+    <a class="logo" th:if="${session.usuariosession != null}" th:href="@{/inicio}">
+        <img src="/img/logoColor.png" alt="" class="logo">
+    </a>
+    <a class="logo" th:unless="${session.usuariosession != null}" th:href="@{/}">
+        <img src="/img/logoColor.png" alt="" class="logo">
+    </a>
+    <div class="volver">
+        <a th:if="${session.usuariosession != null}" th:href="@{/inicio}"> Volver a Inicio</a>
+        <a th:unless="${session.usuariosession != null}" th:href="@{/}">Volver a Inicio</a>
+    </div>
+</nav>
+
+
+    <table class="table table-sm table-bordered w-75 m-auto mt-5 text-center">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Fecha de alta</th>
+            <th scope="col">ID Imagen</th>
+            <th scope="col" sec:authorize="hasRole('ADMIN')">Estado</th>
+            <th scope="col" sec:authorize="hasRole('ADMIN')">Dar de baja</th>
+              <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody th:each="usuario : ${usuarios}">
+          <tr>
+            <th scope="row" th:text="${usuario.id}"></th>
+            <td th:text="${usuario.nombre}"></td>
+            <td th:text="${usuario.apellido}"></td>
+            <td th:text="${usuario.dni}"></td>
+            <td th:text="${usuario.fechaNacimiento}"></td>
+            <td th:text="${usuario.sexo}"></td>
+            <td th:text="${usuario.telefono}"></td>
+            <td th:text="${usuario.email}"></td>
+            <td th:text="${usuario.rol}"></td>
+              <td th:text="${#temporals.format(usuario.fechaAlta, 'dd/MM/yyyy HH:mm:ss')}"></td>
+              <td>
+                  <img class="rounded-3" style="width: 50px;" th:if="${usuario.imagen != null}"
+                       th:src="@{/imagen/perfil/__${usuario.id}__}">
+                  <img class="rounded-3" style="width: 50px;" th:unless="${usuario.imagen != null}"
+                       th:src="@{/img/usuario.jpg}">
+              </td>
+            <td th:text="${usuario.altaSistema}"></td>
+              <td><form th:action="@{/admin/dashboard/cambiar-rol}" method="post" class="form-inline-sm mt-3">
+                  <div class="input-group">
+                      <label class="input-group-text sm" for="inputGroupSelect">Rol</label>
+                      <select class="form-select-sm p-0" id="inputGroupSelect" name="rol">
+                          <option selected>Elige...</option>
+                          <option th:each="rol : ${roles}" th:value="${rol}" th:text="${rol}"></option>
+                      </select>
+                      <input type="hidden" name="id" th:value="${usuario.id}" />
+                      <button type="submit" class=" btn btn-secondary btn-sm  me-2"><i class="bi bi-person-rolodex"></i> Guardar</button>
+                  </div>
+              </form></td>
+              <td>
+                  <div class="container p-2">
+                      <!--  Logica para tener un link dinamico a diferentes rutas segun el rol de usuario-->
+                      <!--
+                      <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+                         th:href="@{${'/'+#strings.toLowerCase(usuario.rol)+'/perfil/' + usuario.id}}">
+                      -->
+                      <a th:if="${#authorization.expression('hasAnyRole(''ADMIN'')')}"
+                         th:href="@{${'/'+#strings.toLowerCase(usuario.rol)+'/perfil/' + usuario.id}}"
+                         method="GET">
+                          <button type="submit" class="btn btn-warning btn-sm">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                   class="bi bi-pencil-square mb-1" viewBox="0 0 16 16">
+                                  <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                  <path fill-rule="evenodd"
+                                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                              </svg>
+                              Modificar Usuario
+                          </button>
+                      </a>
+                  </div>
+                  <div class="container">
+                      <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/usuario/baja/__${usuario.id}__}">
+                      <input type="hidden" th:value="${id}" name="id">
+                      <button type="button" class="btn btn-danger btn-sm">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                               class="bi bi-pencil-square mb-1" viewBox="0 0 16 16">
+                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                              <path fill-rule="evenodd"
+                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                          </svg>
+                          Eliminar
+                      </button>
+                  </a>
+                  </div>
+              </td>
+        </tbody>
+      </table>
+
+
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+</body>
+</html>

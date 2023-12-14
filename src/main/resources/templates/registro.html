@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/css/formularios.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/img/logo.png">
+    <title>Formulario Registro</title>
+</head>
+<body>
+    <nav class="">
+        <a class="logo" href="/">
+            <img src="/img/logoColor.png" alt="" class="logo">
+        </a>
+        <div class="volver">
+        <a href="/">Volver a Inicio</a>
+        </div>
+    </nav>
+    <main class="cuerpo-main">
+        <div class="imagen-principal">
+            <h2 hidden style="color: white;">Desde la imagen principal</h2>
+        </div>
+        <div class="grid-principal">
+            <div class="sidebar">
+                <ul class="lista">
+                    <li>
+                        <h3>Nombre:</h3>
+                        <p>"Por favor, ingrese su nombre completo tal como aparece en su documento de identidad. Este
+                            campo es
+                            obligatorio para completar el registro en nuestro sistema."</p>
+                    </li>
+                    <li>
+                        <h3>Apellido:</h3>
+                        <p>"Proporcione su apellido completo según su documento oficial. Asegúrese de ingresar la
+                            información
+                            correctamente para una identificación precisa en nuestro sistema."</p>
+                    </li>
+                    <li>
+                        <h3>DNI:</h3>
+                        <p>"Ingrese su número de Documento Nacional de Identidad (DNI). Este número es esencial para su
+                            identificación
+                            en nuestro sanatorio. Asegúrese de ingresar los dígitos correctamente."</p>
+                    </li>
+                    <li>
+                        <h3>Fecha de Nacimiento</h3>
+                        <p>"La "Fecha de Nacimiento" es un dato importante para nosotros. Por favor, seleccione su fecha
+                            de nacimiento utilizando el campo proporcionado. Esta información nos ayuda a personalizar
+                            su experiencia y garantiza que recibirá la atención médica adecuada. Apreciamos su
+                            colaboración."</p>
+                    </li>
+                    <li>
+                        <h3>Contraseña:</h3>
+                        <p>"Seleccione una contraseña segura que cumpla con nuestros requisitos de seguridad. La
+                            contraseña debe tener
+                            al menos 8 caracteres, incluyendo letras y números. ¡Mantenga su cuenta protegida!"</p>
+                    </li>
+                    <li>
+                        <h3>Confirmación de Contraseña</h3>
+                        <p> "Confirme la contraseña ingresada anteriormente. Esto ayuda a prevenir errores y asegura que
+                            haya ingresado
+                            la contraseña deseada. Asegúrese de que coincida exactamente con la contraseña anterior."
+                        </p>
+                    </li>
+                    <li>
+                        <h3>Genero:</h3>
+                        <p> "Ingrese el genero, esto nos ayudara a diferenciar mejor su identidad"</p>
+                    </li>
+                </ul>
+            </div>
+            <form class="formulario" th:action="@{/paciente/registrar}" method="POST">
+                <legend class="legend">Completá el Formulario de Registro para darte de alta:</legend>
+                <div class="contenedor-inputs">
+                    <div>
+                        <label class="tipografia">Nombre</label>
+                        <input class="input-text" id="nombre-registro" name="nombre" placeholder="Indique su Nombre">
+                    </div>
+                    <div>
+                        <label class="tipografia">Apellido</label>
+                        <input class="input-text" id="apellido-registro" name="apellido"
+                            placeholder="Indique su Apellido">
+                    </div>
+                    <div>
+                        <label class="tipografia">DNI</label>
+                        <input class="input-text" type="number" id="dni-registro" name="dni" min="1"
+                            placeholder="Indique su DNI sin puntos ni comas">
+                    </div>
+                    <div>
+                        <label class="tipografia">Fecha de Nacimiento:</label>
+                        <input class="input-text" type="date" id="fecha-registro" name="fechaNacimiento"
+                            placeholder="Indique su Fecha de Nacimiento">
+                    </div>
+                    <div>
+                        <label class="tipografia">Contraseña</label>
+                        <input class="input-text" type="password" id="password-registro" name="password"
+                            placeholder="Indique su Contraseña">
+                    </div>
+                    <div>
+                        <label class="tipografia">Confirme Contraseña:</label>
+                        <input class="input-text" type="password" id="password2-registro" name="password2"
+                            placeholder="Confirme su Contraseña">
+                    </div>
+                    <div class="opcion-genero">
+                        <label class="tipografia" for="genero-registro">Genero</label>
+                        <select class="input-text" id="inputGroupSelect" name="sexo">
+                            <option selected>Elige...</option>
+                            <option th:each="sexo : ${generos}" th:value="${sexo}" th:text="${sexo}"></option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <button class="boton-enviar" type="submit">Registrarse</button>
+                    <p th:if="${error != null}" class="warnings" id="warnings"></p>
+                </div>
+            </form>
+        </div>
+    </main>
+    <footer class="pie">
+        <div class="links">
+            <div class="seccion-nav">
+                <p class="titulo-sec">Nosotros</p>
+                <div>
+                    <a>Preguntas frecuentes</a>
+
+                </div>
+            </div>
+            <div class="seccion-nav">
+                <p class="titulo-sec">Pacientes</p>
+                <div>
+                    <a href="#seccion1" onclick="cambiarCartel('pac')">Información</a>
+                </div>
+            </div>
+            <div class="seccion-nav">
+                <p class="titulo-sec">E-mail</p>
+                <div>
+                    <a href="mailto:tudireccion@gmail.com">
+                        <i class="fas fa-envelope"></i> info@sanatoriovitalis.com
+                    </a>
+                </div>
+            </div>
+            <div class="seccion-nav">
+                <p class="titulo-sec">Contacto</p>
+                <div>
+                    <a href="tu-link-de-WhatsApp" target="_blank">
+                        <i class="fab fa-whatsapp"></i> 11-1234-5678
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="tyc">
+            &copy; 2023 Sanatorio Vitalis. Todos los derechos reservados.
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"></script>
+    <script src="/js/formularios.js"></script>
+</body>
+</html>

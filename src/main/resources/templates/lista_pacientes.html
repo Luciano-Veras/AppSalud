@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Pacientes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="/css/especialidad.css">
+    <link rel="icon" type="image/png" href="/img/logo.png">
+</head>
+<body>
+
+<nav class="">
+    <a class="logo" th:if="${session.usuariosession != null}" th:href="@{/inicio}">
+        <img src="/img/logoColor.png" alt="" class="logo">
+    </a>
+    <a class="logo" th:unless="${session.usuariosession != null}" th:href="@{/}">
+        <img src="/img/logoColor.png" alt="" class="logo">
+    </a>
+    <div class="volver">
+        <a th:if="${session.usuariosession != null}" th:href="@{/inicio}"> Volver a Inicio</a>
+        <a th:unless="${session.usuariosession != null}" th:href="@{/}">Volver a Inicio</a>
+    </div>
+</nav>
+
+
+<table class="table table-sm table-bordered w-75 m-auto mt-5 text-center">
+    <thead>
+    <tr>
+
+        <th scope="col">ID</th>
+        <th scope="col">DNI</th>
+        <th scope="col">Email</th>
+        <th scope="col">Sexo</th>
+        <th scope="col">Nº Afiliado</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Apellido</th>
+        <th scope="col">Activo</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Tipo de Usuario</th>
+        <th scope="col">Foto Perfil</th>
+        <th scope="col" sec:authorize="hasRole('ADMIN')">Modificar</th>
+        <th scope="col" sec:authorize="hasRole('ADMIN')">Dar de baja</th>
+    </tr>
+    </thead>
+    <tbody th:each="paciente : ${pacientes}">
+    <tr>
+        <th scope="row" th:text="${paciente.id}"></th>
+        <td th:text="${paciente.dni}"></td>
+        <td th:text="${paciente.email}"></td>
+        <td th:text="${paciente.sexo}"></td>
+        <td th:text="${paciente.numeroObraSocial}"></td>
+        <td th:text="${paciente.nombre}"></td>
+        <td th:text="${paciente.apellido}"></td>
+        <td th:text="${paciente.altaSistema}"></td>
+        <td th:text="${paciente.telefono}"></td>
+        <td class="badge bg-primary text-white m-2" th:text="${paciente.rol}"></td>
+        <td>
+            <img class="rounded-3" style="width: 32px;" th:if="${paciente.imagen != null}"
+                 th:src="@{/imagen/perfil/__${paciente.id}__}">
+            <img class="rounded-3" style="width: 32px;" th:unless="${paciente.imagen != null}"
+                 th:src="@{/img/usuario.jpg}">
+        </td>
+        <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/paciente/perfil/__${paciente.id}__}">
+            <button type="button" class="btn btn-warning btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-pencil-square mb-1" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg>
+                Modificar
+            </button>
+        </a></td>
+        <td><a sec:authorize="hasRole('ADMIN')" th:href="@{/admin/usuario/baja/__${paciente.id}__}">
+            <input type="hidden" th:value="${id}" name="id">
+            <button type="button" class="btn btn-danger btn-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-pencil-square mb-1" viewBox="0 0 16 16">
+                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                    <path fill-rule="evenodd"
+                          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                </svg>
+                Eliminar
+            </button>
+        </a></td>
+    </tbody>
+</table>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>

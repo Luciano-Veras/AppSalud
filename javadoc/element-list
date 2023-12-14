@@ -1,0 +1,7 @@
+com.egg.webApp
+com.egg.webApp.controladores
+com.egg.webApp.entidades
+com.egg.webApp.enumeraciones
+com.egg.webApp.excepciones
+com.egg.webApp.repositorios
+com.egg.webApp.servicios

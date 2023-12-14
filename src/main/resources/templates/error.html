@@ -1,0 +1,22 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'Error ' + ${codigo}"></title>
+    <link rel="icon" type="image/png" href="/img/logo.png">
+
+</head>
+<body>
+<header class="header">
+
+    <div class="tituloBiblioteca">
+      <a class="navbar-brand" th:text="'Error ' + ${codigo}"></a>
+      <p class="tituloLibros" th:text="${mensaje}"></p>
+    </div>
+</header>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

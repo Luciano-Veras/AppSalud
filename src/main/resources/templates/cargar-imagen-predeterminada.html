@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="container mt-5">
+    <div class="card-body w-100 mx-auto">
+        <div class="card">
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="container">
+                        <div class="container d-flex align-items-center justify-content-center text-center">
+                            <div class="alert alert-danger w-50" role="alert" th:if="${error != null and error != ''}">
+                                <div>
+                                    <h4 class="alert-heading"><i class="bi bi-exclamation-triangle"></i> Error</h4>
+                                    <p class="mb-0" th:text="${error}"></p><br>
+                                    <p>¡Por favor, intenta nuevamente!.</p>
+                                </div>
+                            </div>
+                            <div class="alert alert-success w-50" role="alert" th:if="${exito != null and exito != ''}">
+                                <div>
+                                    <h4 class="alert-heading"><i class="bi bi-check-circle"></i> Éxito</h4>
+                                    <p class="mb-0" th:text="${exito}"></p><br>
+                                    <p>¡La operación se completó con éxito!.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mx-auto mb-4">
+                        <h1 class="mb-4">Imagen Predeterminada</h1>
+                        <form th:action="@{/imagen/predeterminar}" method="post" class="row g-3" enctype="multipart/form-data">
+                            <div class="mb-3 col-md-6">
+                                <label for="archivo" class="form-label">Imagen de Perfil</label>
+                                <input type="file" class="form-control shadow" id="archivo" name="archivo">
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary shadow-xxl" id="submitButton">Guardar</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

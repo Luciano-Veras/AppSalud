@@ -1,0 +1,25 @@
+:root {
+    --azulado: #0097A7;
+    --oscuro: rgb(28, 25, 49);
+    --beige: #f8f2cb;
+    --turquesa: #19dff1;
+    --facebook: #3b5999;
+    --instagram: #e4405f;
+    --linkedin: #0077B5;
+    --whatsapp: #25D366;
+    --colorLindo: #1D7874;
+}
+
+html {
+    box-sizing: border-box;
+}
+
+:before, *:after {
+    box-sizing: inherit;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}

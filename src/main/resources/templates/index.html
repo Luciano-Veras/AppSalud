@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <title>Sanatorio Vitalis</title>
+</head>
+
+<body>
+
+    <nav class="">
+        <a class="logo" href="/">
+            <img src="/img/logoColor.png" alt="" class="logo">
+        </a>
+        <div class="links-nav">
+            <a id="link_prof" class="dropdown"><i id="icono" class="fa-solid fa-angle-down"></i> Profesionales</a>
+            <div id="desplegable" class="dropdown-content">
+                <a href="/profesional/especialidad">Especialidades</a>
+                <a href="/profesional/registrar">Trabaja con nosotros</a>
+            </div>
+        <a th:href="@{/paciente/registrar}"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" fill="currentColor"
+                class="bi bi-person-plus mb-1 me-1" viewBox="0 0 16 16">
+                <path
+                    d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                <path fill-rule="evenodd"
+                    d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+            </svg>Registrarse</a>
+        <a href="/login"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="18" fill="currentColor"
+                class="bi bi-box-arrow-in-right mb-1 me-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                    d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />
+                <path fill-rule="evenodd"
+                    d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+            </svg>Iniciar sesión</a>
+        </div>
+    </nav>
+
+    <main class="main-principal">
+
+        <div class="encabezado1">
+            <div class="seccion1" id="seccion1">
+                <h1 id="h1pac">PACIENTES</h1>
+                <p id="ppac" class="parrafo">Descubre la libertad de gestionar tu salud en nuestra plataforma. Busca
+                    profesionales de la salud por especialidad, compara precios y calificaciones. Agenda fácilmente tus
+                    citas y deja tus datos de contacto, obra social y razón de consulta. Tu bienestar, en tus manos.
+                    <a class="links-header" href="/paciente/registrar">Únete a nuestra comunidad</a> de pacientes empoderados.
+                </p>
+            </div>
+            <div class="seccion2" id="seccion2">
+                <h1 id="h1prof">PROFESIONALES</h1>
+                <p id="pprof" class="parrafo">Bienvenido/a a nuestra plataforma de salud autónoma, donde los
+                    profesionales tienen el control. Regístrate como profesional de la salud, especifica tu especialidad
+                    y horarios disponibles. Administra tu perfil, registra historias clínicas y ofrece consultas a
+                    pacientes. <a class="links-header" href="/profesional/registrar">Únete a nosotros</a> para redefinir la atención médica.</p>
+
+            </div>
+        </div>
+
+        <div id="carouselExampleDark" class="carousel carousel-dark slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" data-bs-interval="10000">
+                    <img src="https://centromedicoabc.com/wp-content/uploads/2023/05/chequeo-medico-general.webp"
+                        class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 hidden>First slide label</h5>
+                        <p hidden>Some representative placeholder content for the first slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item" data-bs-interval="2000">
+                    <img src="https://noticias.iruya.com/b/images/iruya_images/imagenes_bises_newnex/sociedad/salud/medico_familia2.jpg"
+                        class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 hidden>Second slide label</h5>
+                        <p hidden>Some representative placeholder content for the second slide.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="https://politicanecochea.com.ar/wp-content/uploads/2022/10/Featured-image-Student-Blog-Hospital-Team.jpg"
+                        class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5 hidden>Third slide label</h5>
+                        <p hidden>Some representative placeholder content for the third slide.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <div class="tarjetitas">
+            <div class="contenedor-tarjetas">
+                <div class="h-tarjetas">
+                    <h1>NOVEDADES</h1>
+                </div>
+                <div class="tarjeta">
+                    <img src="https://centromedicoabc.com/wp-content/uploads/2022/08/analisis-sangre.jpg" alt="">
+                    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem, voluptas, minima perspiciatis aut facilis.</div>
+                </div>
+                <div class="tarjeta">
+                    <img src="https://www.vidaysalud.com.ar/wp-content/uploads/2023/10/adulto-nino-papel-forma-rinon-dia-mundial-rinon-dia-nacional-donante-organos-concepto-donacion-caridad.webp" alt="">
+                    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem, voluptas, minima perspiciatis aut facilis.</div>
+                </div>
+                <div class="tarjeta">
+                    <img src="https://img.freepik.com/fotos-premium/cientifica-mediana-edad-pastillas-laboratorio_839833-14268.jpg" alt="">
+                    <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorem, voluptas, minima perspiciatis aut facilis.</div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="pie">
+        <div class="links">
+            <div class="seccion-nav">
+                <p class="titulo-sec">Nosotros</p>
+                <div>
+                    <a>Autoridades</a>
+                    <a>Preguntas frecuentes</a>
+                    <a>Términos y condiciones</a>
+                </div>
+            </div>
+            <div class="seccion-nav">
+                <p class="titulo-sec">Pacientes</p>
+                <div>
+                    <a href="#seccion1" onclick="cambiarCartel('pac')">Información</a>
+                    <a>Lorem ipsum</a>
+                    <a>Lorem ipsum</a>
+                </div>
+            </div>
+            <div class="seccion-nav">
+                <p class="titulo-sec">Profesionales</p>
+                <div>
+                    <a href="#seccion2" onclick="cambiarCartel('prof')">Información</a>
+                    <a>Lorem ipsum</a>
+                    <a>Lorem ipsum</a>
+                </div>
+            </div>
+            <div class="seccion-nav">
+                <p class="titulo-sec">Contacto</p>
+                <div>
+                    <a>Lorem ipsum</a>
+                    <a>Lorem ipsum</a>
+                    <a>Lorem ipsum</a>
+                </div>
+            </div>
+        </div>
+        <div class="tyc">
+            &copy; 2023 Sanatorio Vitalis. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

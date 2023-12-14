@@ -1,0 +1,396 @@
+:root {
+    --azulado: #0097A7;
+    --oscuro: rgb(28, 25, 49);
+    --beige: #f8f2cb;
+    --turquesa: #19dff1;
+    --facebook: #3b5999;
+    --instagram: #e4405f;
+    --linkedin: #0077B5;
+    --whatsapp: #25D366;
+    --colorLindo: #1D7874;
+    --colorBoton:#3cd2cb;
+}
+
+html {
+    box-sizing: border-box;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    min-height: 120vh;  
+    background-color: rgb(241, 241, 241);
+    display: flex;
+    flex-direction: column;
+}
+
+
+nav {
+    height: 80px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.521);
+    z-index: 2;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex: 1.1;
+    height: 100%;
+    padding: 0;
+    cursor: pointer;
+    margin-left: 1.4rem;
+}
+
+.logo img {
+    max-width: 300px;
+    height: 100%;
+}
+
+.volver {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    margin-right: 4rem;
+}
+
+nav div a {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: black;
+    font-size: 0.9rem;
+    height: 27%;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s, color .3s ease;
+}
+
+nav a:hover:not(.logo),
+.pie a:hover {
+    color: var(--colorLindo);
+    background-size: 100% 2px;
+    text-decoration: none;
+}
+
+.banner-especialidad {
+    background-image: url('/img/especialidades.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--colorLindo);
+    text-align: left;
+    padding: 50px;
+    font-size: 2em; /* Ajusta el tamaño del texto según tus necesidades */
+    position: relative;
+}
+.banner-especialidad h1 {
+    margin-bottom: 20px;
+}
+
+.banner-especialidad div {
+    z-index: 1;
+}
+button[type="submit"] {
+    padding: 15px 30px; /* Ajusta el padding según tus necesidades */
+    font-size: 1.2em; /* Ajusta el tamaño del texto según tus necesidades */
+    background-color: var(--colorBoton);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button[type="submit"]:hover {
+    background-color: #1D7874; /* Cambia el color al pasar el ratón sobre el botón */
+}
+.volver-a-inicio a {
+    color: var(--azulado); /* Cambia el color del enlace según tu paleta de colores */
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em; /* Ajusta el tamaño del texto según tus necesidades */
+    transition: color 0.3s ease;
+}
+.volver-a-inicio a:hover {
+    color: var(--colorLindo); /* Cambia el color al pasar el ratón sobre el enlace */
+}
+/* Otras sugerencias de estilo */
+.pie {
+    background-color: var(--beige); /* Cambia el color de fondo del pie según tu paleta de colores */
+}
+
+.tyc {
+    color: var(--azulado); /* Cambia el color del texto del pie según tu paleta de colores */
+}
+
+/* Ajustes de estilo específicos para dispositivos móviles */
+@media (max-width: 768px) {
+    /* Realiza ajustes de estilo específicos para dispositivos móviles si es necesario */
+}
+
+
+.busqueda {
+    background-color: #f4f4f4;
+    /* Color de fondo */
+    padding: 20px;
+    text-align: center;
+}
+
+.busqueda form {
+    display: flex;
+    justify-content: left;
+}
+
+.busqueda input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+.busqueda button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1D7874;
+    /* Color de fondo del botón */
+    color: #fff;
+    /* Color del texto del botón */
+    cursor: pointer;
+}
+
+.filtro-letras {
+    text-align: center;
+    margin-top: 20px;
+    /* Ajusta este valor según sea necesario */
+    margin-bottom: 20px;
+    /* Ajusta este valor según sea necesario */
+
+}
+
+.filtro-letras button {
+    margin: 5px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #1D7874;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 80px;
+    /* Ajusta el tamaño según tus necesidades */
+    height: 80px;
+    /* Ajusta el tamaño según tus necesidades */
+}
+
+/*ESPECIALIDADES
+*/
+#especialidades-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 100%;
+}
+
+.centrado {
+    text-align: center;
+}
+
+#especialidades-container.centrado {
+
+ font-size: 24px;
+
+}
+
+#lista-especialidades {
+    list-style-type: none;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.descrip-especia {
+    text-align: center;
+
+}
+
+.contenedor-lista {
+    margin: 1rem;
+}
+
+/* Agrega estilos para los enlaces dentro de la lista de especialidades */
+#lista-especialidades a {
+
+    color: #1D7874;
+    /* Reemplaza "tu-color-deseado" con el color que prefieras */
+    text-decoration: none;
+    /* Elimina el subrayado predeterminado de los enlaces si lo deseas */
+}
+
+#btnMostrarMedicos {
+    text-decoration: none;
+    color: white;
+    background-color: var(--colorBoton);
+    border-radius: 10px;
+    width: 20%;
+    padding: 10px;
+    font-size: 900;
+    margin: auto;
+    display: block;
+    text-align: center;
+
+}
+
+@media (max-width: 768px) {
+    #especialidades-container {
+        flex-direction: column;
+        align-items: center;
+        order: 1;
+    }
+
+    .descrip-especia {
+        height: fit-content;
+        width: fit-content;
+        overflow: visible;
+        order: 2;
+    }
+}
+
+/** FOOTER **/
+
+.pie {
+    padding-top: 1rem;
+    z-index: 2;
+    box-shadow: 0px -1px 10px rgb(0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    color: black;
+    background-color: white;
+    height: 13%;
+    margin-top: auto;
+}
+
+.links {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.tyc {
+    padding: 0.5em;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-self: flex-end;
+}
+
+.seccion-nav {
+    text-align: center;
+    font-size: 1em;
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+}
+
+.seccion-nav div {
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo-sec {
+    text-align: center;
+    font-weight: 600;
+    color: var(--colorLindo);
+}
+
+.pie .seccion-nav a {
+    color: black;
+    font-weight: 420;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 2px;
+    transition: background-size .3s, color .3s ease;
+    font-size: 0.9em;
+    list-style-type: none;
+    text-align: left;
+    cursor: pointer;
+    width: fit-content;
+    text-decoration: none;
+
+}
+
+.pie .seccion-nav a:hover {
+    color: var(--colorLindo);
+    background-size: 100% 2px;
+}
+
+@media(max-width: 768px){
+    nav a:not(.logo){
+        display: none;
+    }
+
+
+
+
+    .encabezado1{
+        height: fit-content;
+    }
+
+    .pie {
+      padding-top: auto;
+      text-align: center;
+      order: 1; /* Cambiar el orden en columnas */
+
+    }
+
+    .links {
+        flex-direction: column;          
+        order: 2;
+        gap: 0.5rem;
+        padding-top: 10px;
+    }
+
+    .tyc {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        flex-direction: column;
+        order: 3; /* Cambiar el orden en columnas */
+       
+    }
+    .filled {
+        color: gold; /* Cambia el color a dorado para indicar una estrella llena */
+    }
+}

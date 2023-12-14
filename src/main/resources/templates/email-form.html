@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario de Correo Electrónico</title>
+</head>
+<body>
+
+<h2>Formulario de Correo Electrónico</h2>
+
+<form th:action="@{/sendEmail}" th:object="${emailForm}" method="post">
+    <label>De:</label>
+    <input type="text" th:field="*{from}" required/>
+
+    <label>Para:</label>
+    <input type="text" th:field="*{to}" required/>
+
+    <button type="submit">Enviar Correo</button>
+</form>
+
+</body>
+</html>
